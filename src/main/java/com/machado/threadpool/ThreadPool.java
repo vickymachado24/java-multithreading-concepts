@@ -25,11 +25,13 @@ public class ThreadPool {
         }
     }
 
-    public synchronized void  execute(Runnable task) throws Exception{
-        if(this.isStopped) throw
-                new IllegalStateException("ThreadPool is stopped");
+    public synchronized void execute(Runnable task) throws Exception {
+        if(this.isStopped) throw new IllegalStateException("ThreadPool is stopped");
+        //for blocking behaviour
+        //this.taskQueue.offer(task);
 
-        this.taskQueue.offer(task);
+        //below waits till the task has been successfully added to queue
+        this.taskQueue.put(task);
     }
 
     public synchronized void stop(){
