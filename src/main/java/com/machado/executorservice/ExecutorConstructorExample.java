@@ -25,7 +25,9 @@ public class ExecutorConstructorExample {
         } catch (ExecutionException e) {
             throw new RuntimeException(e);
         }
-
+        executorService.shutdownNow();
         executorService.shutdown();
+
+
     }
 }
